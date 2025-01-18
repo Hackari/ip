@@ -1,4 +1,4 @@
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -18,7 +18,7 @@ public class Task {
 
     public Task mark(boolean toMark) {
         if (toMark == isDone) {
-            System.out.println(description + " is already " + (toMark ? "un" : "") + "marked.");
+            System.out.println(description + " is already " + (toMark ? " " : "un") + "marked.");
         } else {
             isDone = toMark;
             System.out.println(description + " has been updated:\n" + this);
