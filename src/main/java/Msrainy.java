@@ -15,21 +15,33 @@ public class Msrainy {
                 + banner // banner generated from patorjk.com's TAAG
                 + "What can I do for you?");
     }
-    public static void readList(List<String> list) {
+    public static void readTaskList(List<Task> list) {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + ". " + list.get(i));
         }
     }
+    public static List<Task> changeMark(List<Task> list, String userInput, boolean mark) {
+        String[] tokens = userInput.split(" ");
+        int taskIndex = Integer.parseInt(tokens[tokens.length - 1]);
+        Task markedTask = list.get(taskIndex).mark(mark);
+        list.set(taskIndex, markedTask);
+        return list;
+    }
     public static void main(String[] args) {
         welcome();
-        List<String> tasks = new ArrayList<String>();
+        List<Task> tasks = new ArrayList<Task>();
         Scanner scanner = new Scanner(System.in);
         String userInput = scanner.nextLine();
         do {
             if (userInput.equals("list")) {
-                readList(tasks);
+                readTaskList(tasks);
+            } else if (userInput.startsWith("mark")) {
+                tasks = changeMark(tasks, userInput, true);
+            } else if (userInput.startsWith("unmark")) {
+                tasks = changeMark(tasks, userInput, false);
             } else {
-                tasks.add(userInput);
+                Task newTask = new Task(userInput);
+                tasks.add(newTask);
                 System.out.println("added: " + userInput);
             }
             userInput = scanner.nextLine();
