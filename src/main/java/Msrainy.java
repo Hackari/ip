@@ -24,7 +24,7 @@ public class Msrainy {
         }
     }
     public static List<Task> changeMark(List<Task> taskList, List<String> tokens, boolean mark) {
-        int taskIndex = Integer.parseInt(tokens.get(tokens.size() - 1));
+        int taskIndex = Integer.parseInt(tokens.get(1));
         Task markedTask = taskList.get(taskIndex).mark(mark);
         taskList.set(taskIndex, markedTask);
         return taskList;
@@ -46,13 +46,20 @@ public class Msrainy {
                 } catch (NumberFormatException e) {
                     System.out.println(("\tPlease add the index of the task you want to operate on."));
                 }
-            } else if (userInput.startsWith("unmark ")) {
+            } else if (userInput.startsWith("unmark")) {
                 try {
                     tasks = changeMark(tasks, tokens, false);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
                 } catch (NumberFormatException e) {
                     System.out.println(("\tPlease add the index of the task you want to operate on."));
+                }
+            } else if (userInput.startsWith("delete")) {
+                try {
+                    Task RemovedTask = tasks.remove(Integer.parseInt(tokens.get(1)));
+                    System.out.println("\tSuccessfully removed: " + RemovedTask);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
                 }
             } else {
                 String taskType = tokens.remove(0);
@@ -101,13 +108,16 @@ public class Msrainy {
                                     "\ttodo <description>\n" +
                                     "\tdeadline <description> /by <time>\n" +
                                     "\tevent <description> /from <start> /to <end>\n" +
-                                    "\tbye");
+                                    "\tmark <index>" +
+                                    "\tunmark <index>" +
+                                    "\tdelete <index>" +
+                                    "\t bye");
                     }
-                    System.out.println("\tThere are " + tasks.size() + " tasks.");
                 } catch (MsrainyException e) {
                     System.out.println(e.getMessage());
                 }
             }
+            System.out.println("(There are now " + tasks.size() + " tasks.)");
             userInput = scanner.nextLine();
         }
         while (!userInput.equals("bye"));

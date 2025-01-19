@@ -2,50 +2,73 @@ Hello, I am
 MS RAINY
 What can I do for you?
 	There are no tasks
-	Please add the index of the task you want to operate on.
+(There are now 0 tasks.)
 	The task you requested for does not exist. Use list to see indices.
+(There are now 0 tasks.)
+	The task you requested for does not exist. Use list to see indices.
+(There are now 0 tasks.)
 	Sorry, todo requires a description.
+(There are now 0 tasks.)
 Created [T][ ] read book
-	There are 1 tasks.
+(There are now 1 tasks.)
 Created [D][ ] return book (by: June 6th)
-	There are 2 tasks.
+(There are now 2 tasks.)
 	Sorry, deadlines require a /by.
+(There are now 2 tasks.)
 	Sorry, the description and/or /by fields cannot be empty.
+(There are now 2 tasks.)
 	Sorry, the description and/or /by fields cannot be empty.
+(There are now 2 tasks.)
 	Sorry, events require both /from and /to.
+(There are now 2 tasks.)
 	Sorry, events require both /from and /to.
+(There are now 2 tasks.)
 	Sorry, please write /to after /from.
+(There are now 2 tasks.)
 Created [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
-	There are 3 tasks.
+(There are now 3 tasks.)
 	Sorry, the description, /to, and/or /from fields cannot be empty.
+(There are now 3 tasks.)
 	Sorry, please write /to after /from.
+(There are now 3 tasks.)
 	Sorry, the description, /to, and/or /from fields cannot be empty.
+(There are now 3 tasks.)
 	Sorry, the description, /to, and/or /from fields cannot be empty.
+(There are now 3 tasks.)
 	Sorry, the description, /to, and/or /from fields cannot be empty.
+(There are now 3 tasks.)
 	Sorry, the description, /to, and/or /from fields cannot be empty.
+(There are now 3 tasks.)
 Created [T][ ] join sports club
-	There are 4 tasks.
+(There are now 4 tasks.)
 read book has been updated:
 [T][X] read book
+(There are now 4 tasks.)
 read book is already marked.
+(There are now 4 tasks.)
 read book has been updated:
 [T][ ] read book
+(There are now 4 tasks.)
 read book is already unmarked.
+(There are now 4 tasks.)
 read book has been updated:
 [T][X] read book
+(There are now 4 tasks.)
 join sports club has been updated:
 [T][X] join sports club
+(There are now 4 tasks.)
 Created [T][ ] borrow book
-	There are 5 tasks.
+(There are now 5 tasks.)
 	0. [T][X] read book
 	1. [D][ ] return book (by: June 6th)
 	2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
 	3. [T][X] join sports club
 	4. [T][ ] borrow book
+(There are now 5 tasks.)
 Created [D][ ] return book (by: sunday)
-	There are 6 tasks.
+(There are now 6 tasks.)
 Created [E][ ] project meeting (from: Mon 2pm to: 4pm)
-	There are 7 tasks.
+(There are now 7 tasks.)
 	0. [T][X] read book
 	1. [D][ ] return book (by: June 6th)
 	2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
@@ -53,4 +76,5 @@ Created [E][ ] project meeting (from: Mon 2pm to: 4pm)
 	4. [T][ ] borrow book
 	5. [D][ ] return book (by: sunday)
 	6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+(There are now 7 tasks.)
 	Bye. Hope to see you again soon!
