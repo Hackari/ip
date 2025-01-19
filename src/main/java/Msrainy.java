@@ -10,9 +10,9 @@ public class Msrainy {
                         + " |_|  |_|_____/  |_|  \\_\\__,_|_|_| |_|\\__, |\n"
                         + "                                       __/ |\n"
                         +       "                                      |___/ \n";
-
+        banner = "MS RAINY\n";
         System.out.println("Hello, I am\n"
-                + banner // banner generated from patorjk.com's TAAG
+                + banner // banner no longer generated from patorjk.com's TAAG
                 + "What can I do for you?");
     }
     public static void readTaskList(List<Task> taskList) {
