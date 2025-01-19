@@ -1,3 +1,5 @@
+import main.java.MsrainyException;
+
 import java.util.*;
 public class Msrainy {
     public static void welcome() {
@@ -16,8 +18,9 @@ public class Msrainy {
                 + "What can I do for you?");
     }
     public static void readTaskList(List<Task> taskList) {
+        if (taskList.size() == 0) { System.out.println("\tThere are no tasks"); }
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(i + ". " + taskList.get(i));
+            System.out.println("\t" + i + ". " + taskList.get(i));
         }
     }
     public static List<Task> changeMark(List<Task> taskList, List<String> tokens, boolean mark) {
@@ -36,39 +39,78 @@ public class Msrainy {
             if (userInput.equals("list")) {
                 readTaskList(tasks);
             } else if (userInput.startsWith("mark")) {
-                tasks = changeMark(tasks, tokens, true);
-            } else if (userInput.startsWith("unmark")) {
-                tasks = changeMark(tasks, tokens, false);
+                try {
+                    tasks = changeMark(tasks, tokens, true);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
+                } catch (NumberFormatException e) {
+                    System.out.println(("\tPlease add the index of the task you want to operate on."));
+                }
+            } else if (userInput.startsWith("unmark ")) {
+                try {
+                    tasks = changeMark(tasks, tokens, false);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
+                } catch (NumberFormatException e) {
+                    System.out.println(("\tPlease add the index of the task you want to operate on."));
+                }
             } else {
                 String taskType = tokens.remove(0);
                 Task newTask;
-                switch (taskType) {
-                    case "todo":
-                        newTask = new ToDo(String.join(" ",tokens));
-                        tasks.add(newTask);
-                        break;
-                    case "deadline":
-                        int byIndex = tokens.indexOf("/by");
-                        newTask = new Deadline(String.join(" ",tokens.subList(0, byIndex)),
-                                String.join(" ",tokens.subList(byIndex + 1, tokens.size())));
-                        tasks.add(newTask);
-                        break;
-                    case "event":
-                        int fromIndex = tokens.indexOf("/from");
-                        int toIndex = tokens.indexOf("/to");
-                        newTask = new Event(String.join(" ",tokens.subList(0, fromIndex)),
-                                String.join(" ",tokens.subList(fromIndex + 1, toIndex)),
-                                String.join(" ", tokens.subList(toIndex + 1, tokens.size())));
-                        tasks.add(newTask);
-                        break;
-                    default:
-                        System.out.println("Invalid task type");
-}
+                try {
+                    switch (taskType) {
+                        case "todo":
+                            if (tokens.isEmpty()) {
+                                throw new MsrainyException("\tSorry, todo requires a description.");
+                            }
+                            newTask = new ToDo(String.join(" ", tokens));
+                            tasks.add(newTask);
+                            break;
+                        case "deadline":
+                            int byIndex = tokens.indexOf("/by");
+                            if (byIndex == -1) {
+                                throw new MsrainyException("\tSorry, deadlines require a /by.");
+                            }
+                            if (byIndex == 0 || byIndex == tokens.size() -1) {
+                                throw new MsrainyException("\tSorry, the description and/or /by fields cannot be empty.");
+                            }
+                            newTask = new Deadline(String.join(" ", tokens.subList(0, byIndex)),
+                                    String.join(" ", tokens.subList(byIndex + 1, tokens.size())));
+                            tasks.add(newTask);
+                            break;
+                        case "event":
+                            int fromIndex = tokens.indexOf("/from");
+                            int toIndex = tokens.indexOf("/to");
+                            if (fromIndex == -1 || toIndex == -1) {
+                                throw new MsrainyException("\tSorry, events require both /from and /to.");
+                            }
+                            if (toIndex < fromIndex) {
+                                throw new MsrainyException("\tSorry, please write /to after /from.");
+                            }
+                            if (fromIndex == 0 || toIndex == tokens.size() -1 || toIndex - fromIndex == 1) {
+                                throw new MsrainyException("\tSorry, the description, /to, and/or /from fields cannot be empty.");
+                            }
+                            newTask = new Event(String.join(" ", tokens.subList(0, fromIndex)),
+                                    String.join(" ", tokens.subList(fromIndex + 1, toIndex)),
+                                    String.join(" ", tokens.subList(toIndex + 1, tokens.size())));
+                            tasks.add(newTask);
+                            break;
+                        default:
+                            throw new MsrainyException("\tSorry, this command does not exist. Try\n" +
+                                    "\tlist\n" +
+                                    "\ttodo <description>\n" +
+                                    "\tdeadline <description> /by <time>\n" +
+                                    "\tevent <description> /from <start> /to <end>\n" +
+                                    "\tbye");
+                    }
+                    System.out.println("\tThere are " + tasks.size() + " tasks.");
+                } catch (MsrainyException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-            System.out.println("There are " + tasks.size() + " tasks.");
             userInput = scanner.nextLine();
         }
         while (!userInput.equals("bye"));
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("\tBye. Hope to see you again soon!");
     }
 }

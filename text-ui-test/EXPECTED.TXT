@@ -1,38 +1,56 @@
 Hello, I am
 MS RAINY
 What can I do for you?
+	There are no tasks
+	Please add the index of the task you want to operate on.
+	The task you requested for does not exist. Use list to see indices.
+	Sorry, todo requires a description.
 Created [T][ ] read book
-There are 1 tasks.
+	There are 1 tasks.
 Created [D][ ] return book (by: June 6th)
-There are 2 tasks.
+	There are 2 tasks.
+	Sorry, deadlines require a /by.
+	Sorry, the description and/or /by fields cannot be empty.
+	Sorry, the description and/or /by fields cannot be empty.
+	Sorry, events require both /from and /to.
+	Sorry, events require both /from and /to.
+	Sorry, please write /to after /from.
 Created [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
-There are 3 tasks.
+	There are 3 tasks.
+	Sorry, the description, /to, and/or /from fields cannot be empty.
+	Sorry, please write /to after /from.
+	Sorry, the description, /to, and/or /from fields cannot be empty.
+	Sorry, the description, /to, and/or /from fields cannot be empty.
+	Sorry, the description, /to, and/or /from fields cannot be empty.
+	Sorry, the description, /to, and/or /from fields cannot be empty.
 Created [T][ ] join sports club
-There are 4 tasks.
+	There are 4 tasks.
 read book has been updated:
 [T][X] read book
-There are 4 tasks.
+read book is already marked.
+read book has been updated:
+[T][ ] read book
+read book is already unmarked.
+read book has been updated:
+[T][X] read book
 join sports club has been updated:
 [T][X] join sports club
-There are 4 tasks.
 Created [T][ ] borrow book
-There are 5 tasks.
-0. [T][X] read book
-1. [D][ ] return book (by: June 6th)
-2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
-3. [T][X] join sports club
-4. [T][ ] borrow book
-There are 5 tasks.
+	There are 5 tasks.
+	0. [T][X] read book
+	1. [D][ ] return book (by: June 6th)
+	2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
+	3. [T][X] join sports club
+	4. [T][ ] borrow book
 Created [D][ ] return book (by: sunday)
-There are 6 tasks.
+	There are 6 tasks.
 Created [E][ ] project meeting (from: Mon 2pm to: 4pm)
-There are 7 tasks.
-0. [T][X] read book
-1. [D][ ] return book (by: June 6th)
-2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
-3. [T][X] join sports club
-4. [T][ ] borrow book
-5. [D][ ] return book (by: sunday)
-6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
-There are 7 tasks.
-Bye. Hope to see you again soon!
+	There are 7 tasks.
+	0. [T][X] read book
+	1. [D][ ] return book (by: June 6th)
+	2. [E][ ] project meeting (from: aug 6th 2pm to: 4pm)
+	3. [T][X] join sports club
+	4. [T][ ] borrow book
+	5. [D][ ] return book (by: sunday)
+	6. [E][ ] project meeting (from: Mon 2pm to: 4pm)
+	Bye. Hope to see you again soon!
