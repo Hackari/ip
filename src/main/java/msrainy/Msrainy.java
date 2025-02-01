@@ -3,9 +3,11 @@ package main.java.msrainy;
 import main.java.MsrainyException;
 import main.java.msrainy.command.Find;
 import main.java.msrainy.command.Mark;
+import main.java.msrainy.command.ReadList;
 import main.java.msrainy.storage.Populate;
 import main.java.msrainy.storage.Update;
 import main.java.msrainy.ui.Welcome;
+import main.java.msrainy.command.Delete;
 import main.java.msrainy.command.task.Task;
 import main.java.msrainy.command.task.ToDo;
 import main.java.msrainy.command.task.Deadline;
@@ -22,13 +24,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Msrainy {
-    public static void readTaskList(List<Task> taskList) {
-        if (taskList.isEmpty()) { System.out.println("\tThere are no tasks"); }
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println("\t" + i + ". " + taskList.get(i));
-        }
-    }
-
     public static void main(String[] args) {
         Welcome.welcome();
         String filename = "./data/tasks.txt";
@@ -50,7 +45,7 @@ public class Msrainy {
             try {
                 switch (command) {
                     case "list":
-                        readTaskList(tasks);
+                        ReadList.readTaskList(tasks);
                         break;
                     case "mark":
                         Mark.changeMark(tasks, tokens, true);
@@ -59,19 +54,10 @@ public class Msrainy {
                         Mark.changeMark(tasks, tokens, false);
                         break;
                     case "delete":
-                        try {
-                            Task RemovedTask = tasks.remove(Integer.parseInt(tokens.get(0)));
-                            System.out.println("\tSuccessfully removed: " + RemovedTask);
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
-                        }
+                        Delete.delete(tasks, tokens);
                         break;
                     case "find":
-                        try {
-                            Find.find(tasks, tokens.get(0));
-                        } catch (IndexOutOfBoundsException e) {
-                            System.out.println("\tPlease add the singular keyword you with to look for.");
-                        }
+                        Find.find(tasks, tokens);
                         break;
                     case "todo":
                         if (tokens.isEmpty()) {

@@ -5,9 +5,15 @@ import main.java.msrainy.command.task.Task;
 import java.util.List;
 
 public class Find {
-    public static void find(List<Task> tasks, String keyword) {
+    public static void find(List<Task> tasks, List<String> tokens) {
         boolean found = false;
-        if (tasks.isEmpty()) { System.out.println("\tThere are no tasks"); }
+        if (tokens.isEmpty()) {
+            System.out.println("\tPlease enter a keyword");
+        }
+        String keyword = tokens.get(0);
+        if (tasks.isEmpty()) {
+            System.out.println("\tThere are no tasks");
+        }
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription();
@@ -17,7 +23,7 @@ public class Find {
             }
         }
         if (!found) {
-            System.out.println("\tThere are no contain this keyword");
+            System.out.println("\tThere are no entries that contain this keyword");
         }
     }
 }
