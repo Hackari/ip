@@ -14,5 +14,7 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
-    public String toData() { return "T#" + super.toData(); }
+    public String toData() {
+        return "T#" + super.toData();
+    }
 }

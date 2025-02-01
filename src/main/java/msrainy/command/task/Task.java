@@ -35,6 +35,8 @@ public abstract class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }
-    public String toData() { return isDone + "#" + description; }
+    public String toData() {
+        return isDone + "#" + description;
+    }
 
 }

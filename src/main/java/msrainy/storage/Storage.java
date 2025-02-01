@@ -1,5 +1,6 @@
 package main.java.msrainy.storage;
 
+import main.java.msrainy.TaskList;
 import main.java.msrainy.command.task.Deadline;
 import main.java.msrainy.command.task.Event;
 import main.java.msrainy.command.task.Task;
@@ -7,14 +8,23 @@ import main.java.msrainy.command.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Populate {
-    public static ArrayList<Task> populate(File file) throws FileNotFoundException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+public class Storage {
+    private final String filePath;
+
+    public Storage(String filepath) {
+        this.filePath = filepath;
+    }
+
+    public List<Task> load() throws FileNotFoundException {
+        File file = new File(filePath);
+        ArrayList<Task> tasks = new ArrayList<>();
         Scanner s = new Scanner(file);
         while (s.hasNextLine()) {
             String line = s.nextLine();
@@ -35,5 +45,19 @@ public class Populate {
             }
         }
         return tasks;
+    }
+
+    public void update(Task task) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(task.toData() + "\n");
+        fw.close();
+    }
+
+    public void update(TaskList tasks) throws IOException {
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < tasks.size(); i++) {
+            fw.write(tasks.get(i).toData() + "\n");
+        }
+        fw.close();
     }
 }
