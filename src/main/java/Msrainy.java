@@ -55,6 +55,22 @@ public class Msrainy {
         }
     }
 
+    public static void find(List<Task> tasks, String keyword) {
+        boolean found = false;
+        if (tasks.isEmpty()) { System.out.println("\tThere are no tasks"); }
+        for (int i = 0; i < tasks.size(); i++) {
+            Task task = tasks.get(i);
+            String description = task.getDescription();
+            if (description.contains(keyword)) {
+                System.out.println("\t" + i + ". " + tasks.get(i));
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("\tThere are no contain this keyword");
+        }
+    }
+
     public static ArrayList<Task> populate(File file) throws FileNotFoundException {
         ArrayList<Task> tasks = new ArrayList<Task>();
         Scanner s = new Scanner(file);
@@ -121,6 +137,12 @@ public class Msrainy {
                         System.out.println("\tSuccessfully removed: " + RemovedTask);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
+                    }
+                } else if (userInput.startsWith("find")) {
+                    try {
+                        find(tasks, tokens.get(0));
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println("\tPlease add the singular keyword you with to look for.");
                     }
                 } else {
 
