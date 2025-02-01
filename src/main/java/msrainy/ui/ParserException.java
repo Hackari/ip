@@ -1,6 +1,6 @@
-package main.java.msrainy.ui;
+package msrainy.ui;
 
-import main.java.msrainy.MsrainyException;
+import msrainy.MsrainyException;
 
 public class ParserException extends MsrainyException {
     public ParserException(String message) {

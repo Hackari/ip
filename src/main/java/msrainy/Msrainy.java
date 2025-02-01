@@ -1,9 +1,9 @@
-package main.java.msrainy;
+package msrainy;
 
-import main.java.msrainy.storage.Storage;
-import main.java.msrainy.ui.Ui;
-import main.java.msrainy.command.Command;
-import main.java.msrainy.ui.Parser;
+import msrainy.storage.Storage;
+import msrainy.ui.Ui;
+import msrainy.command.Command;
+import msrainy.ui.Parser;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;

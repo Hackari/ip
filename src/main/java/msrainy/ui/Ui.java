@@ -1,4 +1,4 @@
-package main.java.msrainy.ui;
+package msrainy.ui;
 
 import java.util.Scanner;
 

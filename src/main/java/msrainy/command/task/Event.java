@@ -1,6 +1,6 @@
-package main.java.msrainy.command.task;
+package msrainy.command.task;
 
-import main.java.msrainy.ui.ParserException;
+import msrainy.ui.ParserException;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

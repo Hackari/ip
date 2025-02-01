@@ -1,10 +1,10 @@
-package main.java.msrainy.storage;
+package msrainy.storage;
 
-import main.java.msrainy.TaskList;
-import main.java.msrainy.command.task.Deadline;
-import main.java.msrainy.command.task.Event;
-import main.java.msrainy.command.task.Task;
-import main.java.msrainy.command.task.ToDo;
+import msrainy.TaskList;
+import msrainy.command.task.Deadline;
+import msrainy.command.task.Event;
+import msrainy.command.task.Task;
+import msrainy.command.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,8 +1,8 @@
-package main.java.msrainy.command;
+package msrainy.command;
 
-import main.java.msrainy.TaskList;
-import main.java.msrainy.storage.Storage;
-import main.java.msrainy.ui.Ui;
+import msrainy.TaskList;
+import msrainy.storage.Storage;
+import msrainy.ui.Ui;
 
 public class Bye extends Command {
     public boolean execute(TaskList tasks, Ui ui, Storage storage)  {

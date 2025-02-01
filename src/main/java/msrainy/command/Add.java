@@ -1,9 +1,9 @@
-package main.java.msrainy.command;
+package msrainy.command;
 
-import main.java.msrainy.TaskList;
-import main.java.msrainy.command.task.Task;
-import main.java.msrainy.storage.Storage;
-import main.java.msrainy.ui.Ui;
+import msrainy.TaskList;
+import msrainy.command.task.Task;
+import msrainy.storage.Storage;
+import msrainy.ui.Ui;
 
 import java.io.IOException;
 

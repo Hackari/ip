@@ -1,4 +1,4 @@
-package main.java.msrainy;
+package msrainy;
 
 public class MsrainyException extends Exception {
     public MsrainyException(String message) {

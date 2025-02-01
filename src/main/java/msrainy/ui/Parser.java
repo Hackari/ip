@@ -1,15 +1,15 @@
-package main.java.msrainy.ui;
+package msrainy.ui;
 
-import main.java.msrainy.command.Command;
-import main.java.msrainy.command.ReadList;
-import main.java.msrainy.command.Mark;
-import main.java.msrainy.command.Delete;
-import main.java.msrainy.command.Find;
-import main.java.msrainy.command.Add;
-import main.java.msrainy.command.Bye;
-import main.java.msrainy.command.task.ToDo;
-import main.java.msrainy.command.task.Deadline;
-import main.java.msrainy.command.task.Event;
+import msrainy.command.Command;
+import msrainy.command.ReadList;
+import msrainy.command.Mark;
+import msrainy.command.Delete;
+import msrainy.command.Find;
+import msrainy.command.Add;
+import msrainy.command.Bye;
+import msrainy.command.task.ToDo;
+import msrainy.command.task.Deadline;
+import msrainy.command.task.Event;
 
 import java.util.ArrayList;
 import java.util.Arrays;

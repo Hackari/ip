@@ -1,7 +1,7 @@
-package main.java.msrainy;
+package msrainy;
 
-import main.java.msrainy.command.task.Task;
-import main.java.msrainy.ui.Ui;
+import msrainy.command.task.Task;
+import msrainy.ui.Ui;
 
 import java.util.List;
 import java.util.ArrayList;

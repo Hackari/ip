@@ -1,4 +1,4 @@
-package main.java.msrainy.command.task;
+package msrainy.command.task;
 
 public abstract class Task {
     protected String description;
