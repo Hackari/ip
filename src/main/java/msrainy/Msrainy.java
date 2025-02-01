@@ -1,4 +1,16 @@
+package main.java.msrainy;
+
 import main.java.MsrainyException;
+import main.java.msrainy.command.Find;
+import main.java.msrainy.command.Mark;
+import main.java.msrainy.storage.Populate;
+import main.java.msrainy.storage.Update;
+import main.java.msrainy.ui.Welcome;
+import main.java.msrainy.command.task.Task;
+import main.java.msrainy.command.task.ToDo;
+import main.java.msrainy.command.task.Deadline;
+import main.java.msrainy.command.task.Event;
+
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -8,100 +20,23 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Msrainy {
-    public static void welcome() {
-        String banner =
-                "  __   __  _____   _____       _             \n"
-                        + " |  \\;/  |/ ____| |  __ \\     (_)            \n"
-                        + " | \\  / | (___   | |__) |__ _ _ _ __  _   _ \n"
-                        + " | |\\/| |\\___ \\  |  _  // _` | | '_ \\| | | |\n"
-                        + " | |  | |____) | | | \\ \\ (_| | | | | | |_| |\n"
-                        + " |_|  |_|_____/  |_|  \\_\\__,_|_|_| |_|\\__, |\n"
-                        + "                                       __/ |\n"
-                        +       "                                      |___/ \n";
-        banner = "MS RAINY";
-        System.out.println("Hello, I am\n"
-                + banner // banner no longer generated from patorjk.com's TAA
-                );
-    }
+
     public static void readTaskList(List<Task> taskList) {
         if (taskList.isEmpty()) { System.out.println("\tThere are no tasks"); }
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + i + ". " + taskList.get(i));
         }
     }
-    public static List<Task> changeMark(List<Task> taskList, List<String> tokens, boolean mark) {
-        int taskIndex = Integer.parseInt(tokens.get(0));
-        Task markedTask = taskList.get(taskIndex).mark(mark);
-        taskList.set(taskIndex, markedTask);
-        return taskList;
-    }
-
-    public static void update(List<Task> tasks, String filename, String taskType, String index) throws IOException {
-        if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline")) {
-            FileWriter fw = new FileWriter(filename, true);
-            fw.write(tasks.get(tasks.size() - 1).toData() + "\n");
-            fw.close();
-        } else {
-            FileWriter fw = new FileWriter(filename);
-            for (Task task : tasks) {
-                fw.write(task.toData() + "\n");
-            }
-            fw.close();
-        }
-    }
-
-    public static void find(List<Task> tasks, String keyword) {
-        boolean found = false;
-        if (tasks.isEmpty()) { System.out.println("\tThere are no tasks"); }
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
-            String description = task.getDescription();
-            if (description.contains(keyword)) {
-                System.out.println("\t" + i + ". " + tasks.get(i));
-                found = true;
-            }
-        }
-        if (!found) {
-            System.out.println("\tThere are no contain this keyword");
-        }
-    }
-
-    public static ArrayList<Task> populate(File file) throws FileNotFoundException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        Scanner s = new Scanner(file);
-        while (s.hasNextLine()) {
-            String line = s.nextLine();
-            List<String> tokens = new ArrayList<>(Arrays.asList(line.split("#")));
-            String type = tokens.get(0);
-            switch (type) {
-            case "T":
-                tasks.add(new ToDo(tokens.get(2), tokens.get(1).equals("true")));
-                break;
-            case "D":
-                tasks.add(new Deadline(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3)));
-                break;
-            case "E":
-                tasks.add(new Event(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3), tokens.get(4)));
-                break;
-            default:
-                System.out.println("\t" + type + ": Unrecognized data entry. Will not be parsed and may be removed");
-            }
-        }
-        return tasks;
-    }
 
     public static void main(String[] args) {
-        welcome();
+        Welcome.welcome();
         String filename = "./data/tasks.txt";
         File file = new File(filename);
         List<Task> tasks = new ArrayList<Task>();
         try {
-            tasks = populate(file);
+            tasks = Populate.populate(file);
         } catch (FileNotFoundException e) {
             System.out.println("File not found. Please ensure it is found at: " + filename);
             System.exit(1);
@@ -117,7 +52,7 @@ public class Msrainy {
             } else {
                 if (userInput.startsWith("mark")) {
                     try {
-                        tasks = changeMark(tasks, tokens, true);
+                        tasks = Mark.changeMark(tasks, tokens, true);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
                     } catch (NumberFormatException e) {
@@ -125,7 +60,7 @@ public class Msrainy {
                     }
                 } else if (userInput.startsWith("unmark")) {
                     try {
-                        tasks = changeMark(tasks, tokens, false);
+                        tasks = Mark.changeMark(tasks, tokens, false);
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("\tThe task you requested for does not exist. Use list to see indices.");
                     } catch (NumberFormatException e) {
@@ -140,12 +75,11 @@ public class Msrainy {
                     }
                 } else if (userInput.startsWith("find")) {
                     try {
-                        find(tasks, tokens.get(0));
+                        Find.find(tasks, tokens.get(0));
                     } catch (IndexOutOfBoundsException e) {
                         System.out.println("\tPlease add the singular keyword you with to look for.");
                     }
                 } else {
-
                     Task newTask;
                     try {
                         switch (taskType) {
@@ -207,7 +141,7 @@ public class Msrainy {
                 }
                 if (!Thread.currentThread().isInterrupted() || !isOk) {
                     try {
-                        update(tasks, filename, taskType, tokens.get(0));
+                        Update.update(tasks, filename, taskType, tokens.get(0));
                     } catch (IOException e) {
                         // Actually, this will never happen but oh well
                     } catch (IndexOutOfBoundsException e) {
