@@ -1,5 +1,6 @@
 import main.java.MsrainyException;
 import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,9 @@ import java.util.Scanner;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class Msrainy {
     public static void welcome() {
@@ -40,7 +44,7 @@ public class Msrainy {
     public static void update(List<Task> tasks, String filename, String taskType, String index) throws IOException {
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline")) {
             FileWriter fw = new FileWriter(filename, true);
-            fw.write("\n" + tasks.get(tasks.size() - 1).toData());
+            fw.write(tasks.get(tasks.size() - 1).toData() + "\n");
             fw.close();
         } else {
             FileWriter fw = new FileWriter(filename);
@@ -138,9 +142,13 @@ public class Msrainy {
                                 if (byIndex == 0 || byIndex == tokens.size() -1) {
                                     throw new MsrainyException("\tSorry, the description and/or /by fields cannot be empty.");
                                 }
-                                newTask = new Deadline(String.join(" ", tokens.subList(0, byIndex)),
-                                        String.join(" ", tokens.subList(byIndex + 1, tokens.size())));
-                                tasks.add(newTask);
+                                try {
+                                    newTask = new Deadline(String.join(" ", tokens.subList(0, byIndex)),
+                                            String.join(" ", tokens.subList(byIndex + 1, tokens.size())));
+                                    tasks.add(newTask);
+                                } catch (DateTimeParseException e) {
+                                    System.out.println("Please enter a datetime in the format dd/MM/yyyy HHmm");
+                                }
                                 break;
                             case "event":
                                 int fromIndex = tokens.indexOf("/from");
@@ -180,6 +188,8 @@ public class Msrainy {
                         update(tasks, filename, taskType, tokens.get(0));
                     } catch (IOException e) {
                         // Actually, this will never happen but oh well
+                    } catch (IndexOutOfBoundsException e) {
+                        // Ignore this too
                     }
                 }
             }
