@@ -8,6 +8,9 @@
 /build/
 src/main/resources/docs/
 
+# Jar Compilation Files
+src/main/java/msrainy/out
+
 # MacOS custom attributes files created by Finder
 .DS_Store
 *.iml

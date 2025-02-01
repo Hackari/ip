@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClass.set("seedu.duke.Duke")
+    mainClass.set("msrainy.Msrainy")
 }
 
 shadowJar {
@@ -43,4 +43,10 @@ run{
 
 checkstyle {
     toolVersion = '10.2'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'msrainy.Msrainy'
+    }
 }
