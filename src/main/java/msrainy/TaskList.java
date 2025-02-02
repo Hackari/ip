@@ -15,15 +15,27 @@ public class TaskList {
     private List<Task> tasks;
     private final Ui ui;
 
+    /**
+     * Creates an empty task list.
+     *
+     * @param ui The user interface instance for displaying messages.
+     */
     public TaskList(Ui ui) {
         this.tasks = new ArrayList<Task>();
         this.ui = ui;
     }
 
+    /**
+     * Creates a task list initialized with an existing list of tasks.
+     *
+     * @param tasks The list of tasks to initialize the task list with.
+     * @param ui    The user interface instance for displaying messages.
+     */
     public TaskList(List<Task> tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;
     }
+
     /**
      * Removes a task from the list at the specified index.
      *

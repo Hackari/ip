@@ -7,11 +7,22 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a task with the given description and completion status.
+     *
+     * @param description The description of the task.
+     * @param isDone      True if the task is marked as completed, false otherwise.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
     }
 
+    /**
+     * Creates a task with the given description. The task is initially unmarked.
+     *
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

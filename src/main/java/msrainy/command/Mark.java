@@ -15,6 +15,12 @@ public class Mark extends Command {
     private final int index;
     private final boolean isMarking;
 
+    /**
+     * Creates a command to mark or unmark a task.
+     *
+     * @param index     The index of the task to be modified.
+     * @param isMarking True if marking the task as completed, false if unmarking.
+     */
     public Mark(int index, boolean isMarking) {
         this.index = index;
         this.isMarking = isMarking;

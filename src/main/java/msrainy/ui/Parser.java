@@ -51,7 +51,7 @@ public class Parser {
             case "deadline":
                 int byIndex = tokens.indexOf("/by");
                 if (byIndex == -1) {
-                        throw new ParserException("\tSorry, deadlines require a /by.");
+                    throw new ParserException("\tSorry, deadlines require a /by.");
                 }
                 if (byIndex == 0 || byIndex == tokens.size() - 1) {
                     throw new ParserException("\tSorry, the description and/or /by fields cannot be empty.");
