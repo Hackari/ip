@@ -1,10 +1,12 @@
 package msrainy.command;
 
+import java.io.IOException;
+
 import msrainy.TaskList;
 import msrainy.storage.Storage;
 import msrainy.ui.Ui;
 
-import java.io.IOException;
+
 
 public class Mark extends Command {
     private final int index;

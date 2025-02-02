@@ -1,12 +1,12 @@
 package msrainy;
 
-import msrainy.storage.Storage;
-import msrainy.ui.Ui;
-import msrainy.command.Command;
-import msrainy.ui.Parser;
-
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import msrainy.command.Command;
+import msrainy.storage.Storage;
+import msrainy.ui.Parser;
+import msrainy.ui.Ui;
 
 public class Msrainy {
     private final Storage storage;

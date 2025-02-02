@@ -1,11 +1,13 @@
 package msrainy.command;
 
+import java.io.IOException;
+
 import msrainy.TaskList;
 import msrainy.command.task.Task;
 import msrainy.storage.Storage;
 import msrainy.ui.Ui;
 
-import java.io.IOException;
+
 
 public class Add extends Command {
     private final Task task;
