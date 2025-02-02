@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents an event task that occurs within a specific time range.
+ */
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
@@ -32,6 +35,8 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (from: " + from.format(DateTimeFormatter.ofPattern("MMM d yy HHmm"))
                 + " to: " + to.format(DateTimeFormatter.ofPattern("MMM d yy HHmm")) + ")";
     }
+
+    @Override
     public String toData() {
         return "E#" + super.toData() + "#" + from + "#" + to;
     }

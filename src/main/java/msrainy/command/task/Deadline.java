@@ -6,6 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a task with a specific deadline.
+ */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
@@ -28,6 +31,8 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yy HHmm")) + ")";
     }
+
+    @Override
     public String toData() {
         return "D#" + super.toData() + "#" + by;
     }

@@ -15,9 +15,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Parses user input commands and returns the corresponding command object.
+ */
 public class Parser {
+    /**
+     * Parses the user input command and converts it into a {@code Command} object.
+     *
+     * @param fullCommand The full command input by the user.
+     * @return The corresponding command object.
+     * @throws ParserException If the command is malformed or missing required arguments.
+     */
     public static Command parse(String fullCommand) throws ParserException {
-        List<String> tokens = new ArrayList<String>(Arrays.asList(fullCommand.split(" ")));
+        List<String> tokens = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
         String commandType = tokens.remove(0);
         try {
             switch (commandType) {
@@ -41,11 +51,11 @@ public class Parser {
                 case "deadline":
                     int byIndex = tokens.indexOf("/by");
                     if (byIndex == -1) {
-                            throw new ParserException("\tSorry, deadlines require a /by.");
-                        }
-                        if (byIndex == 0 || byIndex == tokens.size() - 1) {
-                            throw new ParserException("\tSorry, the description and/or /by fields cannot be empty.");
-                        }
+                        throw new ParserException("\tSorry, deadlines require a /by.");
+                    }
+                    if (byIndex == 0 || byIndex == tokens.size() - 1) {
+                        throw new ParserException("\tSorry, the description and/or /by fields cannot be empty.");
+                    }
                     return new Add(new Deadline(String.join(" ", tokens.subList(0, byIndex)),
                             String.join(" ", tokens.subList(byIndex + 1, tokens.size()))));
                 case "event":
@@ -70,6 +80,5 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new ParserException("Please supply an index to perform this command.");
         }
-
     }
 }
