@@ -1,11 +1,5 @@
 package msrainy.storage;
 
-import msrainy.TaskList;
-import msrainy.command.task.Deadline;
-import msrainy.command.task.Event;
-import msrainy.command.task.Task;
-import msrainy.command.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+
+import msrainy.TaskList;
+import msrainy.command.task.Deadline;
+import msrainy.command.task.Event;
+import msrainy.command.task.Task;
+import msrainy.command.task.ToDo;
 
 /**
  * Handles loading and saving tasks to a file for persistent storage.
@@ -40,17 +40,17 @@ public class Storage {
             List<String> tokens = new ArrayList<>(Arrays.asList(line.split("#")));
             String type = tokens.get(0);
             switch (type) {
-                case "T":
-                    tasks.add(new ToDo(tokens.get(2), tokens.get(1).equals("true")));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3)));
-                    break;
-                case "E":
-                    tasks.add(new Event(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3), tokens.get(4)));
-                    break;
-                default:
-                    System.out.println("\t" + type + ": Unrecognized data entry. Will not be parsed and may be removed");
+            case "T":
+                tasks.add(new ToDo(tokens.get(2), tokens.get(1).equals("true")));
+                break;
+            case "D":
+                tasks.add(new Deadline(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3)));
+                break;
+            case "E":
+                tasks.add(new Event(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3), tokens.get(4)));
+                break;
+            default:
+                System.out.println("\t" + type + ": Unrecognized data entry. Will not be parsed and may be removed");
             }
         }
         return tasks;

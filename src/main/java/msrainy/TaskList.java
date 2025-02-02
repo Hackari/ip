@@ -1,10 +1,10 @@
 package msrainy;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import msrainy.command.task.Task;
 import msrainy.ui.Ui;
-
-import java.util.List;
-import java.util.ArrayList;
 
 /**
  * Manages a list of tasks, allowing tasks to be added, removed, modified,

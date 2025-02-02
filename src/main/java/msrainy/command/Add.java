@@ -1,11 +1,13 @@
 package msrainy.command;
 
+import java.io.IOException;
+
 import msrainy.TaskList;
 import msrainy.command.task.Task;
 import msrainy.storage.Storage;
 import msrainy.ui.Ui;
 
-import java.io.IOException;
+
 
 /**
  * Represents a command that adds a new task to the task list.

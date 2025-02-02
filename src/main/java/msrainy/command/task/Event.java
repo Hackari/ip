@@ -1,14 +1,15 @@
 package msrainy.command.task;
 
-import msrainy.ui.ParserException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import msrainy.ui.ParserException;
+
 /**
  * Represents an event task that occurs within a specific time range.
  */
+
 public class Event extends Task {
     protected LocalDateTime from;
     protected LocalDateTime to;
