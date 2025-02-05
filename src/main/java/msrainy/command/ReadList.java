@@ -16,8 +16,7 @@ public class ReadList extends Command {
      * @param storage The storage handler (not used in this command).
      * @return false, as this command does not terminate the program.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.print();
-        return false;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.print();
     }
 }

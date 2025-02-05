@@ -1,5 +1,7 @@
 package msrainy.command.task;
 
+import javafx.util.Pair;
+
 /**
  * Represents an abstract task with a description and completion status.
  */
@@ -53,14 +55,15 @@ public abstract class Task {
      * @param toMark True to mark the task as completed, false to unmark it.
      * @return The updated task instance.
      */
-    public Task mark(boolean toMark) {
+    public Pair<Task, String> mark(boolean toMark) {
+        String response = "";
         if (toMark == isDone) {
-            System.out.println(description + " is already " + (toMark ? "" : "un") + "marked.");
+            response = description + " is already " + (toMark ? "" : "un") + "marked.";
         } else {
             isDone = toMark;
-            System.out.println(description + " has been updated:\n" + this);
+            response = description + " has been updated:\n" + this;
         }
-        return this;
+        return new Pair<>(this, response);
     }
 
     /**

@@ -23,11 +23,7 @@ public class Find extends Command {
      * @param storage The storage handler (not used in this command).
      * @return false, as this command does not terminate the program.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        boolean found = tasks.print(keyword);
-        if (!found) {
-            ui.showMessage("\tThere are no entries that contain this keyword");
-        }
-        return false;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.print(keyword);
     }
 }

@@ -35,9 +35,9 @@ public class Mark extends Command {
      * @return false, as this command does not terminate the program.
      * @throws IOException If an I/O error occurs while updating storage.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        tasks.changeMark(index, isMarking);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String response = tasks.changeMark(index, isMarking);
         storage.update(tasks);
-        return false;
+        return response;
     }
 }

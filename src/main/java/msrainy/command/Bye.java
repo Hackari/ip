@@ -16,8 +16,7 @@ public class Bye extends Command {
      * @param storage The storage handler (not used in this command).
      * @return true, indicating that the program should terminate.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.bye();
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.bye(); // TODO: Actually quit the program
     }
 }

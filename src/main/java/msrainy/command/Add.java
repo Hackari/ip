@@ -28,9 +28,9 @@ public class Add extends Command {
      * @return false, as this command does not terminate the program.
      * @throws IOException If an I/O error occurs while updating storage.
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        tasks.add(task, ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String response = tasks.add(task, ui);
         storage.update(task);
-        return false;
+        return response;
     }
 }

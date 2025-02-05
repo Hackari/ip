@@ -18,8 +18,8 @@ public abstract class Command {
      * @param tasks   The task list on which the command operates.
      * @param ui      The user interface to display messages.
      * @param storage The storage handler to update saved tasks if needed.
-     * @return true if the command terminates the program, otherwise false.
+     * @return the response string.
      * @throws IOException If an I/O error occurs while executing the command.
      */
-    public abstract boolean execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 }

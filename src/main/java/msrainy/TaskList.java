@@ -3,6 +3,7 @@ package msrainy;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.util.Pair;
 import msrainy.command.task.Task;
 import msrainy.ui.Ui;
 
@@ -42,9 +43,9 @@ public class TaskList {
      * @param index The index of the task to remove.
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
-    public void remove(int index) throws IndexOutOfBoundsException {
+    public String remove(int index) throws IndexOutOfBoundsException {
         Task removedTask = tasks.remove(index);
-        ui.showMessage("Removing task " + removedTask);
+        return "Removing task " + removedTask;
     }
 
     /**
@@ -54,17 +55,18 @@ public class TaskList {
      * @param mark The new mark status (true for marked, false for unmarked).
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
-    public void changeMark(int index, boolean mark) throws IndexOutOfBoundsException {
-        Task markedTask = tasks.get(index).mark(mark);
-        tasks.set(index, markedTask);
+    public String changeMark(int index, boolean mark) throws IndexOutOfBoundsException {
+        Pair<Task, String> markedTaskandResponse = tasks.get(index).mark(mark);
+        tasks.set(index, markedTaskandResponse.getKey());
+        return markedTaskandResponse.getValue();
     }
 
     /**
      * Prints all tasks in the list. This calls the another function to search
      * for all entries that contain an empty string, which is all entries.
      */
-    public void print() {
-        print("");
+    public String print() {
+        return print("");
     }
 
     /**
@@ -73,20 +75,19 @@ public class TaskList {
      * @param keyword The keyword to search for within task descriptions.
      * @return true if matching tasks are found, false otherwise.
      */
-    public boolean print(String keyword) {
-        boolean found = false;
+    public String print(String keyword) {
         if (tasks.isEmpty()) {
-            ui.showMessage("\tThere are no tasks");
+            return "\tThere are no tasks";
         }
+        StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription();
             if (description.contains(keyword)) {
-                System.out.println("\t" + i + ". " + tasks.get(i));
-                found = true;
+                response.append("\t").append(i).append(". ").append(tasks.get(i)).append("\n");
             }
         }
-        return found;
+        return response.toString();
     }
 
     /**
@@ -95,9 +96,10 @@ public class TaskList {
      * @param task The task to add.
      * @param ui The user interface instance used for displaying messages.
      */
-    public void add(Task task, Ui ui) {
-        ui.showMessage("Added task: " + task);
+    public String add(Task task, Ui ui) {
         tasks.add(task);
+        return "Added task: " + task;
+
     }
 
     /**
