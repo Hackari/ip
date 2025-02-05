@@ -6,16 +6,12 @@ import java.util.Scanner;
  * Handles user interaction by displaying messages and reading user input.
  */
 public class Ui {
-    public Ui() {
-        welcome();
-    }
-
     /**
      * Displays a welcome message when the application starts.
      */
-    public void welcome() {
-        System.out.println("Hello, I am MS RAINY\n"
-                + "Please enter your commands:");
+    public String welcome() {
+        return "Hello, I am MS RAINY\n"
+                + "Please enter your commands:";
     }
 
     /**
@@ -31,8 +27,8 @@ public class Ui {
     /**
      * Displays a separator line for better readability.
      */
-    public void showLine() {
-        System.out.println("===============");
+    public String showLine() {
+        return "===============";
     }
 
     /**
@@ -45,19 +41,10 @@ public class Ui {
     }
 
     /**
-     * Displays a general message.
-     *
-     * @param message The message to be displayed.
-     */
-    public void showMessage(String message) {
-        System.out.println(message);
-    }
-
-    /**
      * Displays a message when an unrecognized command is entered.
      */
-    public static void commandNotFound() {
-        System.out.println("\tSorry, this command does not exist. Try\n"
+    public static String commandNotFound() {
+        return "\tSorry, this command does not exist. Try\n"
                 + "\tlist\n"
                 + "\ttodo <description>\n"
                 + "\tdeadline <description> /by <time>\n"
@@ -65,20 +52,20 @@ public class Ui {
                 + "\tmark <index>"
                 + "\tunmark <index>"
                 + "\tdelete <index>"
-                + "\t bye");
+                + "\t bye";
     }
 
     /**
      * Displays a farewell message when the application exits.
      */
-    public void bye() {
-        System.out.println("\tBye. Hope to see you again soon!");
+    public String bye() {
+        return "\tBye. Hope to see you again soon!";
     }
 
     /**
      * Displays an error message when loading data fails.
      */
-    public void showLoadingError() {
-        System.out.println("\tSomething went wrong.");
+    public String showLoadingError() {
+        return "\tSomething went wrong.";
     }
 }
