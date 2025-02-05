@@ -35,7 +35,7 @@ public class Msrainy {
 
     /**
      * Runs the main event loop of the application, processing user commands
-     * until an exit command is issued.
+     * until the exit command is issued.
      */
     public void run() {
         boolean isExit = false;
