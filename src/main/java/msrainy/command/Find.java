@@ -10,6 +10,11 @@ import msrainy.ui.Ui;
 public class Find extends Command {
     private final String keyword;
 
+    /**
+     * Creates a Find command with the specified keyword.
+     *
+     * @param keyword The keyword to search for in tasks.
+     */
     public Find(String keyword) {
         this.keyword = keyword;
     }
@@ -21,8 +26,9 @@ public class Find extends Command {
      * @param tasks   The task list to search within.
      * @param ui      The user interface to display results.
      * @param storage The storage handler (not used in this command).
-     * @return false, as this command does not terminate the program.
+     * @return A string representation of the search results.
      */
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return tasks.print(keyword);
     }

@@ -11,7 +11,6 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
-        System.out.println("Created " + this);
     }
 
     /**
@@ -24,11 +23,21 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
+    /**
+     * Returns the string representation of the ToDo task.
+     *
+     * @return A formatted string representing the ToDo task.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    /**
+     * Converts the ToDo task to a string format suitable for data storage.
+     *
+     * @return The formatted string representation of the ToDo task.
+     */
     @Override
     public String toData() {
         return "T#" + super.toData();

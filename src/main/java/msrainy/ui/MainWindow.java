@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import msrainy.Msrainy;
 
 /**
- * Controller for the main GUI.
+ * Controller for the main GUI of the application.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,26 +24,37 @@ public class MainWindow extends AnchorPane {
 
     private Msrainy msrainy;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
-    private Image msrainyImage = new Image(this.getClass().getResourceAsStream("/images/Msrainy.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.jpg"));
+    private final Image msrainyImage = new Image(this.getClass().getResourceAsStream("/images/Msrainy.jpg"));
 
+    /**
+     * Initializes the MainWindow, setting up scroll behavior.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    /** Injects the Duke instance */
+    /**
+     * Sets the Msrainy instance for handling user interactions.
+     *
+     * @param m The Msrainy instance to be used.
+     */
     public void setMsrainy(Msrainy m) {
-        msrainy = m;
+        this.msrainy = m;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles user input by creating dialog boxes for user input and bot response.
+     * The user input is cleared after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        if (input.trim().isEmpty()) {
+            return;
+        }
+
         String response = msrainy.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

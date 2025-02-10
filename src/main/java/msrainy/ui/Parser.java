@@ -23,62 +23,110 @@ public class Parser {
      * Parses the user input command and converts it into a {@code Command} object.
      *
      * @param fullCommand The full command input by the user.
-     * @return The corresponding command object.
+     * @return The corresponding {@code Command} object.
      * @throws ParserException If the command is malformed or missing required arguments.
      */
     public static Command parse(String fullCommand) throws ParserException {
-        List<String> tokens = new ArrayList<String>(Arrays.asList(fullCommand.split(" ")));
+        assert fullCommand != null : "fullCommand should not be null";
+        assert !fullCommand.trim().isEmpty() : "fullCommand should not be empty";
+
+        List<String> tokens = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
+        assert !tokens.isEmpty() : "tokens list should not be empty after splitting";
+
         String commandType = tokens.remove(0);
         try {
             switch (commandType) {
-            case "bye":
-                return new Bye();
-            case "list":
-                return new ReadList();
-            case "mark":
-                return new Mark(Integer.parseInt(tokens.get(0)), true);
-            case "unmark":
-                return new Mark(Integer.parseInt(tokens.get(0)), false);
-            case "delete":
-                return new Delete(Integer.parseInt(tokens.get(0)));
-            case "find":
-                return new Find(String.join(" ", tokens));
-            case "todo":
-                if (tokens.isEmpty()) {
-                    throw new ParserException("\tSorry, todos require a description.");
-                }
-                return new Add(new ToDo(String.join(" ", tokens)));
-            case "deadline":
-                int byIndex = tokens.indexOf("/by");
-                if (byIndex == -1) {
-                    throw new ParserException("\tSorry, deadlines require a /by.");
-                }
-                if (byIndex == 0 || byIndex == tokens.size() - 1) {
-                    throw new ParserException("\tSorry, the description and/or /by fields cannot be empty.");
-                }
-                return new Add(new Deadline(String.join(" ", tokens.subList(0, byIndex)),
-                        String.join(" ", tokens.subList(byIndex + 1, tokens.size()))));
-            case "event":
-                int fromIndex = tokens.indexOf("/from");
-                int toIndex = tokens.indexOf("/to");
-                if (fromIndex == -1 || toIndex == -1) {
-                    throw new ParserException("\tSorry, events require both /from and /to.");
-                }
-                if (toIndex < fromIndex) {
-                    throw new ParserException("\tSorry, please write /to after /from.");
-                }
-                if (fromIndex == 0 || toIndex == tokens.size() - 1 || toIndex - fromIndex == 1) {
-                    throw new ParserException("\tSorry, the description, /to, and/or /from fields cannot be empty.");
-                }
-                return new Add(new Event(String.join(" ", tokens.subList(0, fromIndex)),
-                        String.join(" ", tokens.subList(fromIndex + 1, toIndex)),
-                        String.join(" ", tokens.subList(toIndex + 1, tokens.size()))));
-            default:
-                Ui.commandNotFound();
-                throw new ParserException("Unknown command type: " + commandType);
+                case "bye":
+                    return new Bye();
+                case "list":
+                    return new ReadList();
+                case "mark":
+                    return new Mark(parseIndex(tokens), true);
+                case "unmark":
+                    return new Mark(parseIndex(tokens), false);
+                case "delete":
+                    return new Delete(parseIndex(tokens));
+                case "find":
+                    return new Find(String.join(" ", tokens));
+                case "todo":
+                    return parseToDo(tokens);
+                case "deadline":
+                    return parseDeadline(tokens);
+                case "event":
+                    return parseEvent(tokens);
+                default:
+                    Ui.commandNotFound();
+                    throw new ParserException("Unknown command type: " + commandType);
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ParserException("Please supply an index to perform this command.");
         }
+    }
+
+    /**
+     * Parses and retrieves an index from the provided list of tokens.
+     *
+     * @param tokens The list of tokens extracted from user input.
+     * @return The parsed integer index.
+     * @throws ParserException If the index is missing or invalid.
+     */
+    private static int parseIndex(List<String> tokens) throws ParserException {
+        if (tokens.isEmpty()) {
+            throw new ParserException("Missing index argument.");
+        }
+        return Integer.parseInt(tokens.get(0));
+    }
+
+    /**
+     * Parses a ToDo command.
+     *
+     * @param tokens The list of tokens extracted from user input.
+     * @return The corresponding {@code Add} command with a {@code ToDo} task.
+     * @throws ParserException If the description is missing.
+     */
+    private static Command parseToDo(List<String> tokens) throws ParserException {
+        if (tokens.isEmpty()) {
+            throw new ParserException("Todo requires a description.");
+        }
+        return new Add(new ToDo(String.join(" ", tokens)));
+    }
+
+    /**
+     * Parses a Deadline command.
+     *
+     * @param tokens The list of tokens extracted from user input.
+     * @return The corresponding {@code Add} command with a {@code Deadline} task.
+     * @throws ParserException If the description or deadline time is missing.
+     */
+    private static Command parseDeadline(List<String> tokens) throws ParserException {
+        int byIndex = tokens.indexOf("/by");
+        if (byIndex == -1 || byIndex == 0 || byIndex == tokens.size() - 1) {
+            throw new ParserException("Deadline requires a description and a /by time.");
+        }
+        return new Add(new Deadline(
+                String.join(" ", tokens.subList(0, byIndex)),
+                String.join(" ", tokens.subList(byIndex + 1, tokens.size()))
+        ));
+    }
+
+    /**
+     * Parses an Event command.
+     *
+     * @param tokens The list of tokens extracted from user input.
+     * @return The corresponding {@code Add} command with an {@code Event} task.
+     * @throws ParserException If the description or event timing details are missing or malformed.
+     */
+    private static Command parseEvent(List<String> tokens) throws ParserException {
+        int fromIndex = tokens.indexOf("/from");
+        int toIndex = tokens.indexOf("/to");
+
+        if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex || fromIndex == 0 || toIndex == tokens.size() - 1) {
+            throw new ParserException("Event requires a description, /from, and /to times in proper order.");
+        }
+        return new Add(new Event(
+                String.join(" ", tokens.subList(0, fromIndex)),
+                String.join(" ", tokens.subList(fromIndex + 1, toIndex)),
+                String.join(" ", tokens.subList(toIndex + 1, tokens.size()))
+        ));
     }
 }

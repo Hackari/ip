@@ -24,6 +24,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Creates a DialogBox instance with the given text and image.
+     *
+     * @param text The text to display in the dialog.
+     * @param img The image of the speaker.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -31,6 +37,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
+            System.err.println("Error loading FXML: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -48,10 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox for user input.
+     *
+     * @param text The text entered by the user.
+     * @param img The user's profile image.
+     * @return A DialogBox representing the user's dialog.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Creates a DialogBox for Msrainy's response.
+     *
+     * @param text The response text.
+     * @param img The profile image of Msrainy.
+     * @return A flipped DialogBox representing Msrainy's dialog.
+     */
     public static DialogBox getMsrainyDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
