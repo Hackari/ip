@@ -29,7 +29,7 @@ public class Add extends Command {
      * @throws IOException If an I/O error occurs while updating storage.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        String response = tasks.add(task, ui);
+        String response = tasks.add(task);
         storage.update(task);
         return response;
     }

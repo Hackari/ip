@@ -22,6 +22,7 @@ public class TaskList {
      * @param ui The user interface instance for displaying messages.
      */
     public TaskList(Ui ui) {
+        assert ui != null : "UI instance should not be null";
         this.tasks = new ArrayList<Task>();
         this.ui = ui;
     }
@@ -33,6 +34,8 @@ public class TaskList {
      * @param ui    The user interface instance for displaying messages.
      */
     public TaskList(List<Task> tasks, Ui ui) {
+        assert tasks != null : "Tasks list should not be null";
+        assert ui != null : "UI instance should not be null";
         this.tasks = tasks;
         this.ui = ui;
     }
@@ -44,6 +47,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public String remove(int index) throws IndexOutOfBoundsException {
+        assert index >= 0 && index < tasks.size() : "Index should be within range";
         Task removedTask = tasks.remove(index);
         return "Removing task " + removedTask;
     }
@@ -56,6 +60,7 @@ public class TaskList {
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public String changeMark(int index, boolean mark) throws IndexOutOfBoundsException {
+        assert index >= 0 && index < tasks.size() : "Index should be within range";
         Pair<Task, String> markedTaskandResponse = tasks.get(index).mark(mark);
         tasks.set(index, markedTaskandResponse.getKey());
         return markedTaskandResponse.getValue();
@@ -94,12 +99,11 @@ public class TaskList {
      * Adds a task to the list and displays a message.
      *
      * @param task The task to add.
-     * @param ui The user interface instance used for displaying messages.
      */
-    public String add(Task task, Ui ui) {
+    public String add(Task task) {
+        assert task != null : "Task should not be null";
         tasks.add(task);
         return "Added task: " + task;
-
     }
 
     /**

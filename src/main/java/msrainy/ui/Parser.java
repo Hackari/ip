@@ -27,6 +27,8 @@ public class Parser {
      * @throws ParserException If the command is malformed or missing required arguments.
      */
     public static Command parse(String fullCommand) throws ParserException {
+        assert fullCommand != null : "fullCommand should not be null";
+        assert !fullCommand.isBlank() : "fullCommand should not be empty or blank";
         List<String> tokens = new ArrayList<String>(Arrays.asList(fullCommand.split(" ")));
         String commandType = tokens.remove(0);
         try {
