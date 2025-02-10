@@ -49,9 +49,8 @@ public class Ui {
      *
      * @return A string listing available commands.
      */
-    public static String commandNotFound() {
-        return "\tSorry, this command does not exist. Try\n"
-                + "\tlist\n"
+    public String help() {
+        return "\tlist\n"
                 + "\ttodo <description>\n"
                 + "\tdeadline <description> /by <time>\n"
                 + "\tevent <description> /from <start> /to <end>\n"

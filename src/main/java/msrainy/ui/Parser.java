@@ -4,13 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import msrainy.command.Add;
-import msrainy.command.Bye;
-import msrainy.command.Command;
-import msrainy.command.Delete;
-import msrainy.command.Find;
-import msrainy.command.Mark;
-import msrainy.command.ReadList;
+import msrainy.command.*;
 import msrainy.command.task.Deadline;
 import msrainy.command.task.Event;
 import msrainy.command.task.ToDo;
@@ -54,9 +48,11 @@ public class Parser {
                     return parseDeadline(tokens);
                 case "event":
                     return parseEvent(tokens);
+                case "help":
+                    return new Help();
                 default:
-                    Ui.commandNotFound();
-                    throw new ParserException("Unknown command type: " + commandType);
+                    throw new ParserException("Unknown command type: " + commandType + "\n " +
+                            "Run help for a list of commands");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ParserException("Please supply an index to perform this command.");
