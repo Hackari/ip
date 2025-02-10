@@ -7,7 +7,9 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * Displays a welcome message when the application starts.
+     * Returns a welcome message when the application starts.
+     *
+     * @return The welcome message string.
      */
     public String welcome() {
         return "Hello, I am MS RAINY\n"
@@ -21,27 +23,31 @@ public class Ui {
      * @return The user-entered command as a string.
      */
     public String readCommand(Scanner scanner) {
-        return scanner.nextLine();
+        return scanner.nextLine().trim();
     }
 
     /**
-     * Displays a separator line for better readability.
+     * Returns a separator line for better readability.
+     *
+     * @return A string representing a separator line.
      */
     public String showLine() {
         return "===============";
     }
 
     /**
-     * Displays an error message.
+     * Prints an error message to the console.
      *
      * @param message The error message to be displayed.
      */
     public void showError(String message) {
-        System.out.println(message);
+        System.err.println(message);
     }
 
     /**
-     * Displays a message when an unrecognized command is entered.
+     * Returns a message indicating an unrecognized command.
+     *
+     * @return A string listing available commands.
      */
     public static String commandNotFound() {
         return "\tSorry, this command does not exist. Try\n"
@@ -49,21 +55,25 @@ public class Ui {
                 + "\ttodo <description>\n"
                 + "\tdeadline <description> /by <time>\n"
                 + "\tevent <description> /from <start> /to <end>\n"
-                + "\tmark <index>"
-                + "\tunmark <index>"
-                + "\tdelete <index>"
-                + "\t bye";
+                + "\tmark <index>\n"
+                + "\tunmark <index>\n"
+                + "\tdelete <index>\n"
+                + "\tbye";
     }
 
     /**
-     * Displays a farewell message when the application exits.
+     * Returns a farewell message when the application exits.
+     *
+     * @return The farewell message string.
      */
     public String bye() {
         return "\tBye. Hope to see you again soon!";
     }
 
     /**
-     * Displays an error message when loading data fails.
+     * Returns an error message when loading data fails.
+     *
+     * @return A string indicating a loading error.
      */
     public String showLoadingError() {
         return "\tSomething went wrong.";

@@ -13,7 +13,7 @@ import msrainy.ui.Ui;
  * task-related messages.
  */
 public class TaskList {
-    private List<Task> tasks;
+    private final List<Task> tasks;
     private final Ui ui;
 
     /**
@@ -22,7 +22,7 @@ public class TaskList {
      * @param ui The user interface instance for displaying messages.
      */
     public TaskList(Ui ui) {
-        this.tasks = new ArrayList<Task>();
+        this.tasks = new ArrayList<>();
         this.ui = ui;
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
      * @param ui    The user interface instance for displaying messages.
      */
     public TaskList(List<Task> tasks, Ui ui) {
-        this.tasks = tasks;
+        this.tasks = new ArrayList<>(tasks);
         this.ui = ui;
     }
 
@@ -41,29 +41,32 @@ public class TaskList {
      * Removes a task from the list at the specified index.
      *
      * @param index The index of the task to remove.
+     * @return A message indicating the removed task.
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public String remove(int index) throws IndexOutOfBoundsException {
         Task removedTask = tasks.remove(index);
-        return "Removing task " + removedTask;
+        return "Removing task: " + removedTask;
     }
 
     /**
      * Changes the mark status of a task at the specified index.
      *
      * @param index The index of the task to update.
-     * @param mark The new mark status (true for marked, false for unmarked).
+     * @param mark  The new mark status (true for marked, false for unmarked).
+     * @return A message indicating the updated mark status.
      * @throws IndexOutOfBoundsException If the index is out of range.
      */
     public String changeMark(int index, boolean mark) throws IndexOutOfBoundsException {
-        Pair<Task, String> markedTaskandResponse = tasks.get(index).mark(mark);
-        tasks.set(index, markedTaskandResponse.getKey());
-        return markedTaskandResponse.getValue();
+        Pair<Task, String> markedTaskAndResponse = tasks.get(index).mark(mark);
+        tasks.set(index, markedTaskAndResponse.getKey());
+        return markedTaskAndResponse.getValue();
     }
 
     /**
-     * Prints all tasks in the list. This calls the another function to search
-     * for all entries that contain an empty string, which is all entries.
+     * Prints all tasks in the list.
+     *
+     * @return A formatted string of all tasks.
      */
     public String print() {
         return print("");
@@ -73,33 +76,32 @@ public class TaskList {
      * Prints tasks in the list that contain the specified keyword.
      *
      * @param keyword The keyword to search for within task descriptions.
-     * @return true if matching tasks are found, false otherwise.
+     * @return A formatted string of matching tasks.
      */
     public String print(String keyword) {
         if (tasks.isEmpty()) {
-            return "\tThere are no tasks";
+            return "\tThere are no tasks.";
         }
+
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            String description = task.getDescription();
-            if (description.contains(keyword)) {
-                response.append("\t").append(i).append(". ").append(tasks.get(i)).append("\n");
+            if (task.getDescription().contains(keyword)) {
+                response.append("\t").append(i).append(". ").append(task).append("\n");
             }
         }
-        return response.toString();
+        return response.toString().trim();
     }
 
     /**
-     * Adds a task to the list and displays a message.
+     * Adds a task to the list.
      *
      * @param task The task to add.
-     * @param ui The user interface instance used for displaying messages.
+     * @return A message confirming the task addition.
      */
-    public String add(Task task, Ui ui) {
+    public String add(Task task) {
         tasks.add(task);
         return "Added task: " + task;
-
     }
 
     /**

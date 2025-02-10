@@ -21,8 +21,13 @@ import msrainy.command.task.ToDo;
 public class Storage {
     private final String filePath;
 
-    public Storage(String filepath) {
-        this.filePath = filepath;
+    /**
+     * Creates a Storage instance that handles file operations.
+     *
+     * @param filePath The file path for storage.
+     */
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -33,27 +38,52 @@ public class Storage {
      */
     public List<Task> load() throws FileNotFoundException {
         File file = new File(filePath);
-        ArrayList<Task> tasks = new ArrayList<>();
-        Scanner s = new Scanner(file);
-        while (s.hasNextLine()) {
-            String line = s.nextLine();
-            List<String> tokens = new ArrayList<>(Arrays.asList(line.split("#")));
-            String type = tokens.get(0);
-            switch (type) {
-            case "T":
-                tasks.add(new ToDo(tokens.get(2), tokens.get(1).equals("true")));
-                break;
-            case "D":
-                tasks.add(new Deadline(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3)));
-                break;
-            case "E":
-                tasks.add(new Event(tokens.get(2), tokens.get(1).equals("true"), tokens.get(3), tokens.get(4)));
-                break;
-            default:
-                System.out.println("\t" + type + ": Unrecognized data entry. Will not be parsed and may be removed");
+        if (!file.exists()) {
+            throw new FileNotFoundException("File not found: " + filePath);
+        }
+
+        List<Task> tasks = new ArrayList<>();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                Task task = parseTask(scanner.nextLine());
+                if (task != null) {
+                    tasks.add(task);
+                }
             }
         }
         return tasks;
+    }
+
+    /**
+     * Parses a task from a storage line.
+     *
+     * @param line The stored task data.
+     * @return The corresponding Task object, or null if invalid.
+     */
+    private Task parseTask(String line) {
+        List<String> tokens = new ArrayList<>(Arrays.asList(line.split("#")));
+        if (tokens.size() < 3) {
+            System.err.println("Invalid task format: " + line);
+            return null;
+        }
+
+        String type = tokens.get(0);
+        boolean isDone = Boolean.parseBoolean(tokens.get(1));
+        String description = tokens.get(2);
+
+        switch (type) {
+            case "T":
+                return new ToDo(description, isDone);
+            case "D":
+                if (tokens.size() < 4) return null;
+                return new Deadline(description, isDone, tokens.get(3));
+            case "E":
+                if (tokens.size() < 5) return null;
+                return new Event(description, isDone, tokens.get(3), tokens.get(4));
+            default:
+                System.err.println("Unrecognized task type: " + type);
+                return null;
+        }
     }
 
     /**
@@ -63,9 +93,13 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void update(Task task) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true);
-        fw.write(task.toData() + "\n");
-        fw.close();
+        if (task == null) {
+            throw new IllegalArgumentException("Task to update cannot be null");
+        }
+
+        try (FileWriter fw = new FileWriter(filePath, true)) {
+            fw.write(task.toData() + "\n");
+        }
     }
 
     /**
@@ -75,10 +109,14 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void update(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        for (int i = 0; i < tasks.size(); i++) {
-            fw.write(tasks.get(i).toData() + "\n");
+        if (tasks == null) {
+            throw new IllegalArgumentException("TaskList cannot be null");
         }
-        fw.close();
+
+        try (FileWriter fw = new FileWriter(filePath)) {
+            for (int i = 0; i < tasks.size(); i++) {
+                fw.write(tasks.get(i).toData() + "\n");
+            }
+        }
     }
 }

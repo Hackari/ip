@@ -6,8 +6,6 @@ import msrainy.TaskList;
 import msrainy.storage.Storage;
 import msrainy.ui.Ui;
 
-
-
 /**
  * Represents a command to mark or unmark a task as completed.
  */
@@ -32,7 +30,7 @@ public class Mark extends Command {
      * @param tasks   The task list containing the task to be marked or unmarked.
      * @param ui      The user interface to display messages.
      * @param storage The storage handler to update the saved tasks.
-     * @return false, as this command does not terminate the program.
+     * @return A message indicating the task's updated mark status.
      * @throws IOException If an I/O error occurs while updating storage.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {

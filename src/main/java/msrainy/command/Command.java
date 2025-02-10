@@ -18,7 +18,7 @@ public abstract class Command {
      * @param tasks   The task list on which the command operates.
      * @param ui      The user interface to display messages.
      * @param storage The storage handler to update saved tasks if needed.
-     * @return the response string.
+     * @return A response string describing the result of the command execution.
      * @throws IOException If an I/O error occurs while executing the command.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;

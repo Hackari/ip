@@ -26,8 +26,7 @@ public abstract class Task {
      * @param description The description of the task.
      */
     public Task(String description) {
-        this.description = description;
-        this.isDone = false;
+        this(description, false);
     }
 
     /**
@@ -45,25 +44,22 @@ public abstract class Task {
      * @return "X" if the task is completed, otherwise a space character.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return isDone ? "X" : " ";
     }
 
     /**
      * Marks or unmarks the task based on the provided value.
-     * Displays a message indicating the status change.
+     * Returns a pair containing the updated task and a status message.
      *
      * @param toMark True to mark the task as completed, false to unmark it.
-     * @return The updated task instance.
+     * @return A Pair containing the updated task and a status message.
      */
     public Pair<Task, String> mark(boolean toMark) {
-        String response = "";
         if (toMark == isDone) {
-            response = description + " is already " + (toMark ? "" : "un") + "marked.";
-        } else {
-            isDone = toMark;
-            response = description + " has been updated:\n" + this;
+            return new Pair<>(this, description + " is already " + (toMark ? "" : "un") + "marked.");
         }
-        return new Pair<>(this, response);
+        isDone = toMark;
+        return new Pair<>(this, description + " has been updated:\n" + this);
     }
 
     /**
@@ -71,6 +67,7 @@ public abstract class Task {
      *
      * @return A string indicating the task status and description.
      */
+    @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
     }

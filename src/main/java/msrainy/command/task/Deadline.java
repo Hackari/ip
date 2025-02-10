@@ -11,6 +11,8 @@ import msrainy.ui.ParserException;
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM d yy HHmm");
 
     /**
      * Creates a Deadline task with a specified description and due date.
@@ -22,11 +24,10 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws ParserException {
         super(description);
         try {
-            this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("dd/MM/yy HHmm"));
+            this.by = LocalDateTime.parse(by, INPUT_FORMATTER);
         } catch (DateTimeParseException e) {
             throw new ParserException("Please enter the date in this format: dd/MM/yy HHmm");
         }
-        System.out.println("Created " + this);
     }
 
     /**
@@ -43,7 +44,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yy HHmm")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(OUTPUT_FORMATTER) + ")";
     }
 
     @Override
