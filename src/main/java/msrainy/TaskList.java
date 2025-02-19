@@ -85,7 +85,7 @@ public class TaskList {
      */
     public String print(String keyword) {
         if (tasks.isEmpty()) {
-            return "There are no tasks.";
+            return "There are no tasks now! Great job!";
         }
 
         StringBuilder response = new StringBuilder();
@@ -107,7 +107,7 @@ public class TaskList {
     public String add(Task task) {
         assert task != null : "Task should not be null";
         tasks.add(task);
-        return "Added task: " + task;
+        return "I have added the task: " + task;
     }
 
     /**

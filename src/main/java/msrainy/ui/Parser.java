@@ -51,11 +51,11 @@ public class Parser {
                 case "help":
                     return new Help();
                 default:
-                    throw new ParserException("Unknown command type: " + commandType + "\n " +
-                            "Run help for a list of commands");
+                    throw new ParserException("I do not understand: " + commandType + "\n " +
+                            "Please run Help for a list of commands!");
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new ParserException("Please supply an index to perform this command.");
+            throw new ParserException("Please supply an index!");
         }
     }
 
@@ -68,7 +68,7 @@ public class Parser {
      */
     private static int parseIndex(List<String> tokens) throws ParserException {
         if (tokens.isEmpty()) {
-            throw new ParserException("Missing index argument.");
+            throw new ParserException("Please supply an index!");
         }
         return Integer.parseInt(tokens.get(0));
     }
@@ -82,7 +82,7 @@ public class Parser {
      */
     private static Command parseToDo(List<String> tokens) throws ParserException {
         if (tokens.isEmpty()) {
-            throw new ParserException("Todo requires a description.");
+            throw new ParserException("Give me a description!.");
         }
         return new Add(new ToDo(String.join(" ", tokens)));
     }
@@ -97,7 +97,7 @@ public class Parser {
     private static Command parseDeadline(List<String> tokens) throws ParserException {
         int byIndex = tokens.indexOf("/by");
         if (byIndex == -1 || byIndex == 0 || byIndex == tokens.size() - 1) {
-            throw new ParserException("Deadline requires a description and a /by time.");
+            throw new ParserException("Give me a description and a /by time!");
         }
         return new Add(new Deadline(
                 String.join(" ", tokens.subList(0, byIndex)),
@@ -117,7 +117,7 @@ public class Parser {
         int toIndex = tokens.indexOf("/to");
 
         if (fromIndex == -1 || toIndex == -1 || toIndex < fromIndex || fromIndex == 0 || toIndex == tokens.size() - 1) {
-            throw new ParserException("Event requires a description, /from, and /to times in proper order.");
+            throw new ParserException("Give me a description, a /from time, and a /to time in that order!");
         }
         return new Add(new Event(
                 String.join(" ", tokens.subList(0, fromIndex)),

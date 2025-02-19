@@ -17,6 +17,6 @@ public class Bye extends Command {
      * @return A farewell message indicating that the program is terminating.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.bye(); // TODO: ACTUALLY QUIT THE PROGRAM
+        return ui.sayBye();
     }
 }
