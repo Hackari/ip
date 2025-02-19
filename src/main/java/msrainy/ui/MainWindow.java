@@ -56,10 +56,13 @@ public class MainWindow extends AnchorPane {
         }
 
         String response = msrainy.getResponse(input);
+        String commandType = msrainy.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getMsrainyDialog(response, msrainyImage)
+                DialogBox.getMsrainyDialog(response, msrainyImage, commandType)
         );
+
+
         userInput.clear();
     }
 }

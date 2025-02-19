@@ -85,14 +85,14 @@ public class TaskList {
      */
     public String print(String keyword) {
         if (tasks.isEmpty()) {
-            return "\tThere are no tasks.";
+            return "There are no tasks.";
         }
 
         StringBuilder response = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getDescription().contains(keyword)) {
-                response.append("\t").append(i).append(". ").append(task).append("\n");
+                response.append(i).append(". ").append(task).append("\n");
             }
         }
         return response.toString().trim();
