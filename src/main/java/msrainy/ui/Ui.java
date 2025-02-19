@@ -7,16 +7,6 @@ import java.util.Scanner;
  */
 public class Ui {
     /**
-     * Returns a welcome message when the application starts.
-     *
-     * @return The welcome message string.
-     */
-    public String welcome() {
-        return "Hello, I am MS RAINY\n"
-                + "Please enter your commands:";
-    }
-
-    /**
      * Reads and returns a command entered by the user.
      *
      * @param scanner The Scanner object to read user input.
@@ -24,15 +14,6 @@ public class Ui {
      */
     public String readCommand(Scanner scanner) {
         return scanner.nextLine().trim();
-    }
-
-    /**
-     * Returns a separator line for better readability.
-     *
-     * @return A string representing a separator line.
-     */
-    public String showLine() {
-        return "===============";
     }
 
     /**
@@ -49,8 +30,9 @@ public class Ui {
      *
      * @return A string listing available commands.
      */
-    public String help() {
-        return "\tlist\n"
+    public String showHelp() {
+        return "Here is a list of commands!\n"
+                + "\tlist\n"
                 + "\ttodo <description>\n"
                 + "\tdeadline <description> /by <time>\n"
                 + "\tevent <description> /from <start> /to <end>\n"
@@ -61,12 +43,21 @@ public class Ui {
     }
 
     /**
+     * Returns a welcome message when the application starts.
+     *
+     * @return The welcome message string.
+     */
+    public String sayHi() {
+        return "Hi! Please let me handle your tasks";
+    }
+
+    /**
      * Returns a farewell message when the application exits.
      *
-     * @return The farewell message string.
+     * @return The farewell message string, which is oddly morbid.
      */
-    public String bye() {
-        return "\tBye. Hope to see you again soon!";
+    public String sayBye() {
+        return "Goodbye... you won't even see this...";
     }
 
     /**
@@ -75,6 +66,6 @@ public class Ui {
      * @return A string indicating a loading error.
      */
     public String showLoadingError() {
-        return "\tSomething went wrong.";
+        return "Oh no! Something went wrong.";
     }
 }

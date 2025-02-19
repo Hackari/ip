@@ -4,11 +4,13 @@
     -fx-border-width: 1px;
     -fx-background-radius: 1em 1em 0 1em;
     -fx-border-radius: 1em 1em 0 1em;
+    -fx-wrap-text: true;
 }
 
 .reply-label {
     -fx-background-radius: 1em 1em 1em 0;
     -fx-border-radius: 1em 1em 1em 0;
+    -fx-wrap-text: true;
 }
 
 #displayPicture {
@@ -21,23 +23,22 @@
 
     /* Rotate image clockwise by degrees. */
     -fx-rotate: 0;
-}
-
-.reply-label {
-    -fx-background-radius: 1em 1em 1em 0;
-    -fx-border-radius: 1em 1em 1em 0;
+    -fx-wrap-text: true;
 }
 
 /* Paste this below reply-label */
 .add-label {
     -fx-background-color: yellow;
+    -fx-wrap-text: true;
 }
 
 .marked-label {
     -fx-background-color: palegreen;
+    -fx-wrap-text: true;
 }
 
 .delete-label {
     -fx-background-color: lightpink;
+    -fx-wrap-text: true;
 }
 

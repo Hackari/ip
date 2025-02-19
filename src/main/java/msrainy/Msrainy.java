@@ -21,7 +21,7 @@ public class Msrainy extends javafx.application.Application {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
-    private String commandType;
+    private String commandType = "default";
 
     /**
      * Initializes the Msrainy application, setting up storage, user interface,
@@ -75,7 +75,7 @@ public class Msrainy extends javafx.application.Application {
             return c.execute(tasks, ui, storage);
         } catch (IndexOutOfBoundsException e) {
             ui.showError("The number you entered is out of bounds. Use list to see available indices.");
-            return "The number you entered is out of bounds. Use list to see available indices.";
+            return "Your index is out of bounds! Try list to see available indices!";
         } catch (Exception e) {
             ui.showError(e.getMessage());
             return e.getMessage();
