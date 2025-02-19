@@ -45,6 +45,22 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    private void changeDialogStyle(String commandType) {
+        switch(commandType) {
+            case "Add":
+                dialog.getStyleClass().add("add-label");
+                break;
+            case "ChangeMark":
+                dialog.getStyleClass().add("marked-label");
+                break;
+            case "Delete":
+                dialog.getStyleClass().add("delete-label");
+                break;
+            default:
+                // Do nothing
+        }
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -53,6 +69,7 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.getStyleClass().add("reply-label");
     }
 
     /**
@@ -73,9 +90,10 @@ public class DialogBox extends HBox {
      * @param img The profile image of Msrainy.
      * @return A flipped DialogBox representing Msrainy's dialog.
      */
-    public static DialogBox getMsrainyDialog(String text, Image img) {
+    public static DialogBox getMsrainyDialog(String text, Image img, String commandType) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.changeDialogStyle(commandType);
         return db;
     }
 }
