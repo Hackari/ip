@@ -9,6 +9,14 @@ repositories {
     mavenCentral()
 }
 
+processResources {
+    from('src/main/resources')
+}
+
+tasks.named('processResources') {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.10.0'
@@ -48,9 +56,11 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "msrainy"
     archiveClassifier = null
 }
+
+
 
 run{
     standardInput = System.in
@@ -62,6 +72,6 @@ checkstyle {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'msrainy.Msrainy'
+        attributes 'Main-Class': 'msrainy.ui.Launcher'
     }
 }

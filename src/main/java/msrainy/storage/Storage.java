@@ -97,12 +97,31 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void update(Task task) throws IOException {
+        checkFile();
         if (task == null) {
             throw new IllegalArgumentException("Task to update cannot be null");
         }
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(task.toData() + "\n");
+        fw.close();
+    }
 
-        try (FileWriter fw = new FileWriter(filePath, true)) {
-            fw.write(task.toData() + "\n");
+    private void checkFile() {
+        try {
+            File file = new File(filePath);
+            File directory = file.getParentFile();
+            if (directory != null && !directory.exists()) {
+                boolean createdDirs = directory.mkdirs();
+                if (createdDirs) {
+                    System.out.println("Directory created: " + directory.getAbsolutePath());
+                }
+            }
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getAbsolutePath());
+            }
+        } catch (IOException e) {
+            System.err.println("Error while creating file: " + filePath);
+            System.exit(1);
         }
     }
 
@@ -113,14 +132,15 @@ public class Storage {
      * @throws IOException If an I/O error occurs while writing to the file.
      */
     public void update(TaskList tasks) throws IOException {
+        checkFile();
         if (tasks == null) {
             throw new IllegalArgumentException("TaskList cannot be null");
         }
 
-        try (FileWriter fw = new FileWriter(filePath)) {
-            for (int i = 0; i < tasks.size(); i++) {
-                fw.write(tasks.get(i).toData() + "\n");
-            }
+        FileWriter fw = new FileWriter(filePath);
+        for (int i = 0; i < tasks.size(); i++) {
+            fw.write(tasks.get(i).toData() + "\n");
         }
+        fw.close();
     }
 }

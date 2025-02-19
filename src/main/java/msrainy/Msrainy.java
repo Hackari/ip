@@ -22,7 +22,7 @@ public class Msrainy extends javafx.application.Application {
     private TaskList tasks;
     private final Ui ui;
     private String commandType = "default";
-    private final Image iconImage = new Image(this.getClass().getResourceAsStream("../images/Msrainy.jpg"));
+    private final Image iconImage = new Image(this.getClass().getResourceAsStream("/images/Msrainy.jpg"));
 
     /**
      * Initializes the Msrainy application, setting up storage, user interface,

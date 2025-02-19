@@ -95,6 +95,9 @@ public class TaskList {
                 response.append(i).append(". ").append(task).append("\n");
             }
         }
+        if (response.isEmpty()) {
+            return "There are no tasks with that keyword!";
+        }
         return response.toString().trim();
     }
 
