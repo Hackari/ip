@@ -26,6 +26,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a DialogBox instance with the given text and image.
+     * Loads the FXML layout for the dialog box.
      *
      * @param text The text to display in the dialog.
      * @param img The image of the speaker.
@@ -45,26 +46,32 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Changes the style of the dialog box based on the type of command.
+     *
+     * @param commandType The type of command (e.g., Add, ChangeMark, Delete, Bye).
+     */
     private void changeDialogStyle(String commandType) {
         switch(commandType) {
-            case "Add":
-                dialog.getStyleClass().add("add-label");
-                break;
-            case "ChangeMark":
-                dialog.getStyleClass().add("marked-label");
-                break;
-            case "Delete":
-                dialog.getStyleClass().add("delete-label");
-                break;
-            case "Bye":
-                dialog.getStyleClass().add("bye-label");
-            default:
-                // Do nothing
+        case "Add":
+            dialog.getStyleClass().add("add-label");
+            break;
+        case "ChangeMark":
+            dialog.getStyleClass().add("marked-label");
+            break;
+        case "Delete":
+            dialog.getStyleClass().add("delete-label");
+            break;
+        case "Bye":
+            dialog.getStyleClass().add("bye-label");
+            break;
+        default:
+            // Do nothing
         }
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on the left and the text is on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -90,6 +97,7 @@ public class DialogBox extends HBox {
      *
      * @param text The response text.
      * @param img The profile image of Msrainy.
+     * @param commandType The type of command to determine the dialog style.
      * @return A flipped DialogBox representing Msrainy's dialog.
      */
     public static DialogBox getMsrainyDialog(String text, Image img, String commandType) {

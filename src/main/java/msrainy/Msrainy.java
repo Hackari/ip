@@ -5,9 +5,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import msrainy.command.Command;
 import msrainy.storage.Storage;
 import msrainy.ui.MainWindow;
@@ -22,6 +22,7 @@ public class Msrainy extends javafx.application.Application {
     private TaskList tasks;
     private final Ui ui;
     private String commandType = "default";
+    private final Image iconImage = new Image(this.getClass().getResourceAsStream("../images/Msrainy.jpg"));
 
     /**
      * Initializes the Msrainy application, setting up storage, user interface,
@@ -54,6 +55,8 @@ public class Msrainy extends javafx.application.Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("MsRainy");
+            stage.getIcons().add(iconImage);
             fxmlLoader.<MainWindow>getController().setMsrainy(this);
             stage.show();
         } catch (IOException e) {

@@ -1,20 +1,23 @@
 package msrainy.command;
 
+import java.io.IOException;
+
 import msrainy.TaskList;
 import msrainy.storage.Storage;
 import msrainy.ui.Ui;
 
-import java.io.IOException;
-
-public class Help extends Command{
+/**
+ * Represents a command to display help information.
+ */
+public class Help extends Command {
     /**
-     * Executes the command to add a task to the task list and update storage.
+     * Executes the help command, displaying available commands to the user.
      *
-     * @param tasks   The task list to which the task will be added.
-     * @param ui      The user interface to display messages.
-     * @param storage The storage handler to save the task.
-     * @return A message confirming the task addition.
-     * @throws IOException If an I/O error occurs while updating storage.
+     * @param tasks   The task list (unused in this command).
+     * @param ui      The user interface to display help messages.
+     * @param storage The storage handler (unused in this command).
+     * @return A message displaying help information.
+     * @throws IOException If an I/O error occurs (though unlikely in this case).
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {

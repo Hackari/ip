@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import msrainy.command.*;
+import msrainy.command.Add;
+import msrainy.command.Bye;
+import msrainy.command.Command;
+import msrainy.command.Delete;
+import msrainy.command.Find;
+import msrainy.command.Help;
+import msrainy.command.Mark;
+import msrainy.command.ReadList;
 import msrainy.command.task.Deadline;
 import msrainy.command.task.Event;
 import msrainy.command.task.ToDo;
@@ -30,29 +37,31 @@ public class Parser {
         String commandType = tokens.remove(0);
         try {
             switch (commandType) {
-                case "bye":
-                    return new Bye();
-                case "list":
-                    return new ReadList();
-                case "mark":
-                    return new Mark(parseIndex(tokens), true);
-                case "unmark":
-                    return new Mark(parseIndex(tokens), false);
-                case "delete":
-                    return new Delete(parseIndex(tokens));
-                case "find":
-                    return new Find(String.join(" ", tokens));
-                case "todo":
-                    return parseToDo(tokens);
-                case "deadline":
-                    return parseDeadline(tokens);
-                case "event":
-                    return parseEvent(tokens);
-                case "help":
-                    return new Help();
-                default:
-                    throw new ParserException("I do not understand: " + commandType + "\n " +
-                            "Please run Help for a list of commands!");
+            case "bye":
+                return new Bye();
+            case "list":
+                return new ReadList();
+            case "mark":
+                return new Mark(parseIndex(tokens), true);
+            case "unmark":
+                return new Mark(parseIndex(tokens), false);
+            case "delete":
+                return new Delete(parseIndex(tokens));
+            case "find":
+                return new Find(String.join(" ", tokens));
+            case "todo":
+                return parseToDo(tokens);
+            case "deadline":
+                return parseDeadline(tokens);
+            case "event":
+                return parseEvent(tokens);
+            case "help":
+                return new Help();
+            default:
+                throw new ParserException("I do not understand: "
+                        + commandType
+                        + "\n "
+                        + "Please run Help for a list of commands!");
             }
         } catch (IndexOutOfBoundsException e) {
             throw new ParserException("Please supply an index!");

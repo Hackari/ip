@@ -1,5 +1,7 @@
 package msrainy.ui;
 
+import java.util.Random;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
@@ -9,10 +11,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import msrainy.Msrainy;
 
-import java.util.Random;
+
 
 /**
  * Controller for the main GUI of the application.
+ * Handles user interactions and displays dialog messages between the user and Msrainy.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -31,6 +34,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Initializes the MainWindow, setting up scroll behavior.
+     * Binds the vertical scroll property of the ScrollPane to the height property of the dialog container.
      */
     @FXML
     public void initialize() {
@@ -48,7 +52,8 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Handles user input by creating dialog boxes for user input and bot response.
-     * The user input is cleared after processing.
+     * Determines the appropriate response image based on the command type and displays the dialogs.
+     * Clears the user input field after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -67,6 +72,12 @@ public class MainWindow extends AnchorPane {
         checkExit(commandType);
     }
 
+    /**
+     * Retrieves the appropriate image based on the command type.
+     *
+     * @param commandType The type of command issued by the user.
+     * @return The image representing Msrainy's reaction.
+     */
     private Image getImage(String commandType) {
         if (commandType.equals("Bye")) {
             return msrainySadImage;
@@ -78,6 +89,11 @@ public class MainWindow extends AnchorPane {
         return msrainyHappyImage;
     }
 
+    /**
+     * Exits the application if the command type is "Bye".
+     *
+     * @param commandType The type of command issued by the user.
+     */
     private void checkExit(String commandType) {
         if (commandType.equals("Bye")) {
             Platform.exit();

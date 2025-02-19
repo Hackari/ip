@@ -10,9 +10,9 @@ import msrainy.ui.ParserException;
  * Represents a task with a specific deadline.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM d yy HHmm");
+    protected LocalDateTime by;
 
     /**
      * Creates a Deadline task with a specified description and due date.

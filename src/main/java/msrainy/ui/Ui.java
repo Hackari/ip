@@ -1,20 +1,9 @@
 package msrainy.ui;
 
-import java.util.Scanner;
-
 /**
  * Handles user interaction by displaying messages and reading user input.
  */
 public class Ui {
-    /**
-     * Reads and returns a command entered by the user.
-     *
-     * @param scanner The Scanner object to read user input.
-     * @return The user-entered command as a string.
-     */
-    public String readCommand(Scanner scanner) {
-        return scanner.nextLine().trim();
-    }
 
     /**
      * Prints an error message to the console.
@@ -32,6 +21,7 @@ public class Ui {
      */
     public String showHelp() {
         return "Here is a list of commands!\n"
+                + "\thelp\n"
                 + "\tlist\n"
                 + "\ttodo <description>\n"
                 + "\tdeadline <description> /by <time>\n"
@@ -39,16 +29,8 @@ public class Ui {
                 + "\tmark <index>\n"
                 + "\tunmark <index>\n"
                 + "\tdelete <index>\n"
+                + "\tfind <keyword\n"
                 + "\tbye";
-    }
-
-    /**
-     * Returns a welcome message when the application starts.
-     *
-     * @return The welcome message string.
-     */
-    public String sayHi() {
-        return "Hi! Please let me handle your tasks";
     }
 
     /**

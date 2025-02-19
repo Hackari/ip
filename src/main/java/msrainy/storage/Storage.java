@@ -72,17 +72,21 @@ public class Storage {
         String description = tokens.get(2);
 
         switch (type) {
-            case "T":
-                return new ToDo(description, isDone);
-            case "D":
-                if (tokens.size() < 4) return null;
-                return new Deadline(description, isDone, tokens.get(3));
-            case "E":
-                if (tokens.size() < 5) return null;
-                return new Event(description, isDone, tokens.get(3), tokens.get(4));
-            default:
-                System.err.println("Unrecognized task type: " + type);
+        case "T":
+            return new ToDo(description, isDone);
+        case "D":
+            if (tokens.size() < 4) {
                 return null;
+            }
+            return new Deadline(description, isDone, tokens.get(3));
+        case "E":
+            if (tokens.size() < 5) {
+                return null;
+            }
+            return new Event(description, isDone, tokens.get(3), tokens.get(4));
+        default:
+            System.err.println("Unrecognized task type: " + type);
+            return null;
         }
     }
 
