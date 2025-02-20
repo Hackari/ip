@@ -10,7 +10,7 @@ ALl changes were made by ChatGPT 4o, after pasting in the entirety of the Code S
 
 ## Profile Pictures
 
-All profile pictures were made by ChatGPT 4o.
+All pictures were made by ChatGPT 4o.
 
 
 
