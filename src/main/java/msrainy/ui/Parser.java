@@ -31,9 +31,9 @@ public class Parser {
         assert fullCommand != null : "fullCommand should not be null";
         assert !fullCommand.trim().isEmpty() : "fullCommand should not be empty";
 
-        List<String> tokens = new ArrayList<>(Arrays.asList(fullCommand.split(" ")));
-        assert !tokens.isEmpty() : "tokens list should not be empty after splitting";
-
+        List<String> tokens = new ArrayList<>(Arrays.asList(fullCommand.trim()
+                .replaceAll("\\s{2,}", " ").split(" ")));
+        System.out.println(tokens);
         String commandType = tokens.remove(0);
         try {
             switch (commandType) {
