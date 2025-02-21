@@ -37,9 +37,13 @@ public class Deadline extends Task {
      * @param isDone      True if the task is marked as completed, false otherwise.
      * @param by          The due date and time in ISO-8601 format.
      */
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws ParserException {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by);
+        try {
+            this.by = LocalDateTime.parse(by);
+        } catch (Exception e) {
+            throw new ParserException("Invalid constructor");
+        }
     }
 
     @Override

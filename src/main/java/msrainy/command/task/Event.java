@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import msrainy.ui.Parser;
 import msrainy.ui.ParserException;
 
 /**
@@ -42,10 +43,15 @@ public class Event extends Task {
      * @param from        The start time in ISO-8601 format.
      * @param to          The end time in ISO-8601 format.
      */
-    public Event(String description, boolean isDone, String from, String to) {
+    public Event(String description, boolean isDone, String from, String to) throws ParserException {
         super(description, isDone);
-        this.from = LocalDateTime.parse(from);
-        this.to = LocalDateTime.parse(to);
+        try {
+            this.from = LocalDateTime.parse(from);
+            this.to = LocalDateTime.parse(to);
+        } catch (Exception e) {
+            throw new ParserException("Invalid constructor");
+        }
+
     }
 
     @Override

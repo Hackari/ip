@@ -33,7 +33,6 @@ public class Parser {
 
         List<String> tokens = new ArrayList<>(Arrays.asList(fullCommand.trim()
                 .replaceAll("\\s{2,}", " ").split(" ")));
-        System.out.println(tokens);
         String commandType = tokens.remove(0);
         try {
             switch (commandType) {

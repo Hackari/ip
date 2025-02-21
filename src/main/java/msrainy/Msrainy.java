@@ -36,7 +36,6 @@ public class Msrainy extends javafx.application.Application {
         try {
             tasks = new TaskList(storage.load(), ui);
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
             tasks = new TaskList(ui);
         }
     }
@@ -61,7 +60,6 @@ public class Msrainy extends javafx.application.Application {
             stage.show();
         } catch (IOException e) {
             System.err.println("Error loading FXML: " + e.getMessage());
-            e.printStackTrace();
         }
     }
 
@@ -80,7 +78,6 @@ public class Msrainy extends javafx.application.Application {
             ui.showError("The number you entered is out of bounds. Use list to see available indices.");
             return "Your index is out of bounds! Try list to see available indices!";
         } catch (Exception e) {
-            ui.showError(e.getMessage());
             return e.getMessage();
         }
     }
